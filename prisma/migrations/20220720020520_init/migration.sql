@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "cards" (
+CREATE TABLE "Card" (
     "id" SERIAL NOT NULL,
     "card_number" VARCHAR NOT NULL,
     "card_password" VARCHAR NOT NULL,
@@ -8,6 +8,3 @@ CREATE TABLE "cards" (
 
     CONSTRAINT "cards_pk" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE INDEX "cards_id_idx" ON "cards"("id");
