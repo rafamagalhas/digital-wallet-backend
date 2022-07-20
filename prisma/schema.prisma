@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cards {
+  id               Int    @id(map: "cards_pk") @default(autoincrement())
+  card_number      String @db.VarChar
+  card_password    String @db.VarChar
+  card_user_name   String @db.VarChar
+  card_expire_date String @db.VarChar
+
+  @@index([id])
+}
