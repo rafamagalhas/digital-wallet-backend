@@ -1,10 +1,17 @@
-import { ICard } from './interface/card.interface';
+import { PrismaService } from './../prisma.service';
 import { Injectable } from '@nestjs/common';
+import { Card } from '@prisma/client';
 
 @Injectable()
 export class CardService {
-  async findCard(cardNumber: number): Promise<ICard | undefined> {
-    console.log(cardNumber);
-    return undefined;
+  constructor(private prisma: PrismaService) {}
+
+  async findCard(cardNumber: string): Promise<Card | null> {
+    const card = await this.prisma.card.findFirst({
+      where: {
+        card_number: cardNumber,
+      },
+    });
+    return card;
   }
 }

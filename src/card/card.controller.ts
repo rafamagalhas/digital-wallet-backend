@@ -1,5 +1,6 @@
-import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+import { cardInfoParser } from './card.parsers';
 import { CardService } from './card.service';
 
 @Controller()
@@ -11,9 +12,17 @@ export class CardController {
     @Param('cardNumber') cardNumber: string,
     @Res() res: Response,
   ): Promise<void> {
-    console.log(cardNumber);
-    res.status(HttpStatus.OK).json({
-      cardNumber,
-    });
+    try {
+      const cardResponse = await this.cardService.findCard(cardNumber);
+      if (!cardResponse) {
+        res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ message: 'Card is not found.' });
+        return;
+      }
+      res.status(HttpStatus.OK).json(cardInfoParser(cardResponse));
+    } catch (error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);
+    }
   }
 }
