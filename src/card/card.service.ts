@@ -11,6 +11,13 @@ export class CardService {
       where: {
         card_number: cardNumber,
       },
+      include: {
+        cardBalance: {
+          orderBy: {
+            balance_date: 'desc',
+          },
+        },
+      },
     });
     return card;
   }
