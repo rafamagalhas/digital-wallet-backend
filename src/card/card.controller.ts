@@ -20,7 +20,6 @@ export class CardController {
           .json({ message: 'Card is not found.' });
         return;
       }
-      console.log(cardResponse);
       res.status(HttpStatus.OK).json(cardInfoParser(cardResponse));
     } catch (error) {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error);

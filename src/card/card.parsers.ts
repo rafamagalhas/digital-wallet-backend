@@ -4,6 +4,7 @@ export function cardInfoParser(card: Card) {
   const { id, card_number, card_password, card_user_name, card_expire_date } =
     card;
 
+  const [cardBalanceFisrt] = card['cardBalance'];
   return {
     id,
     cardNumber: card_number,
@@ -11,8 +12,8 @@ export function cardInfoParser(card: Card) {
     cardUsername: card_user_name,
     cardExpireDate: card_expire_date,
     cardBalance: {
-      balance: card['cardBalance'][0].balance,
-      balance_date: card['cardBalance'][0].balance_date,
+      balance: cardBalanceFisrt.balance,
+      balance_date: cardBalanceFisrt.balance_date,
     },
   };
 }
