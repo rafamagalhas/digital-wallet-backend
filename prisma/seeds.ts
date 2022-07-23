@@ -20,6 +20,16 @@ async function seeds() {
       },
     });
   }
+
+  for (let i = 0; i < 5000; i++) {
+    await client.cardBalance.create({
+      data: {
+        card_id: chance.integer({ min: 1, max: 1000 }),
+        balance: chance.floating({ min: 0, max: 500, fixed: 2 }),
+        balance_date: chance.date({ year: 2022, american: false }),
+      },
+    });
+  }
 }
 
 seeds();

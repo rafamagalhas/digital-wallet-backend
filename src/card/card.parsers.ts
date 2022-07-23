@@ -10,5 +10,9 @@ export function cardInfoParser(card: Card) {
     cardPassword: card_password,
     cardUsername: card_user_name,
     cardExpireDate: card_expire_date,
+    cardBalance: {
+      balance: card['cardBalance'][0].balance,
+      balance_date: card['cardBalance'][0].balance_date,
+    },
   };
 }
